@@ -1,5 +1,8 @@
+const container = document.querySelector("#container");
 const booksContainer = document.querySelector("#books-container");
 let myLibrary = [];
+
+newBookButton();
 
 function Book(title, author, pages, readBook) {
   this.title = title;
@@ -39,9 +42,91 @@ const thePenis = new Book("The Penis", "P.P Penis", "69", "read every day");
 myLibrary.push(theHobbit);
 myLibrary.push(thePenis);
 
-displayBooks();
+function newBookButton() {
+  const newBookBtn = document.querySelector(".new-book-btn");
+  newBookBtn.addEventListener("click", newBookForm);
+}
+
+function newBookForm() {
+  const formSection = document.createElement("div");
+  formSection.classList.add("form-section");
+
+  const formHeader = document.createElement("div");
+  formHeader.classList.add("form-header");
+  formHeader.textContent = "New Book";
+
+  const newBookForm = document.createElement("form");
+  newBookForm.setAttribute("action", "");
+  newBookForm.setAttribute("method", "post");
+  newBookForm.setAttribute("id", "new_book_form");
+
+  const titleField = document.createElement("div");
+  titleField.classList.add("form-field");
+  const titleLabel = document.createElement("label");
+  titleLabel.setAttribute("for", "title");
+  titleLabel.textContent = "Title:\n";
+  const titleInput = document.createElement("input");
+  titleInput.setAttribute("type", "text");
+  titleInput.setAttribute("name", "title");
+  titleInput.setAttribute("id", "title");
+  titleInput.setAttribute("placeholder", "Title");
+  titleInput.setAttribute("required", "");
+  titleField.appendChild(titleLabel);
+  titleField.appendChild(titleInput);
+  newBookForm.appendChild(titleField);
+
+  const authorField = document.createElement("div");
+  authorField.classList.add("form-field");
+  const authorLabel = document.createElement("label");
+  authorLabel.setAttribute("for", "author");
+  authorLabel.textContent = "Author:\n";
+  const authorInput = document.createElement("input");
+  authorInput.setAttribute("type", "text");
+  authorInput.setAttribute("name", "author");
+  authorInput.setAttribute("id", "author");
+  authorInput.setAttribute("placeholder", "Author");
+  authorInput.setAttribute("required", "");
+  authorField.appendChild(authorLabel);
+  authorField.appendChild(authorInput);
+  newBookForm.appendChild(authorField);
+
+  const pagesField = document.createElement("div");
+  pagesField.classList.add("form-field");
+  const pagesLabel = document.createElement("label");
+  pagesLabel.setAttribute("for", "pages");
+  pagesLabel.textContent = "Number of pages:\n";
+  const pagesInput = document.createElement("input");
+  pagesInput.setAttribute("type", "number");
+  pagesInput.setAttribute("name", "pages");
+  pagesInput.setAttribute("id", "pages");
+  pagesInput.setAttribute("placeholder", "Pages");
+  pagesInput.setAttribute("min", 1);
+  pagesInput.setAttribute("required", "");
+  pagesField.appendChild(pagesLabel);
+  pagesField.appendChild(pagesInput);
+  newBookForm.appendChild(pagesField);
+
+  const readField = document.createElement("div");
+  readField.classList.add("form-field");
+  const readLabel = document.createElement("label");
+  readLabel.setAttribute("for", "read");
+  readLabel.textContent = "Have you read this book?\n";
+  const readInput = document.createElement("input");
+  readInput.setAttribute("type", "text");
+  readInput.setAttribute("name", "read");
+  readInput.setAttribute("id", "read");
+  readField.appendChild(readLabel);
+  readField.appendChild(readInput);
+  newBookForm.appendChild(readField);
+
+  formSection.appendChild(formHeader);
+  formSection.appendChild(newBookForm);
+  container.appendChild(formSection);
+}
+
 function addBookToLibrary() {}
 
+displayBooks();
 function displayBooks() {
   for (book in myLibrary) {
     const bookDisplay = document.createElement("div");
