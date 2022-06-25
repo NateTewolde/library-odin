@@ -3,7 +3,6 @@ const booksContainer = document.querySelector("#books-container");
 let myLibrary = [];
 
 newBookButton();
-submitFormButton();
 
 function Book(title, author, pages, readBook) {
   this.title = title;
@@ -136,11 +135,6 @@ function newBookForm() {
   formSection.appendChild(formHeader);
   formSection.appendChild(newBookForm);
   container.appendChild(formSection);
-}
-
-function submitFormButton() {
-  const submitFormBtn = document.querySelector(".submit-form-btn");
-  newBookBtn.addEventListener("click", newBookForm);
 }
 
 function addBookToLibrary() {}
