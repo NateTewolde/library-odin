@@ -3,6 +3,7 @@ const booksContainer = document.querySelector("#books-container");
 let myLibrary = [];
 
 newBookButton();
+submitFormButton();
 
 function Book(title, author, pages, readBook) {
   this.title = title;
@@ -116,21 +117,30 @@ function newBookForm() {
   const readOptionYes = document.createElement("option");
   readOptionYes.setAttribute("value", "yes");
   readOptionYes.setAttribute("selected", "");
-  readOptionYes.textContent = "Yes 😃";
-
+  readOptionYes.textContent = "Yes  😃";
   const readOptionNo = document.createElement("option");
   readOptionNo.setAttribute("value", "no");
-  readOptionNo.textContent = "No  😢";
-
+  readOptionNo.textContent = "No 😢";
   readSelect.appendChild(readOptionYes);
   readSelect.appendChild(readOptionNo);
   readField.appendChild(readLabel);
   readField.appendChild(readSelect);
   newBookForm.appendChild(readField);
 
+  const submitBtn = document.createElement("button");
+  submitBtn.classList.add("submit-form-btn");
+  submitBtn.setAttribute("type", "submit");
+  submitBtn.textContent = "Submit";
+  newBookForm.appendChild(submitBtn);
+
   formSection.appendChild(formHeader);
   formSection.appendChild(newBookForm);
   container.appendChild(formSection);
+}
+
+function submitFormButton() {
+  const submitFormBtn = document.querySelector(".submit-form-btn");
+  newBookBtn.addEventListener("click", newBookForm);
 }
 
 function addBookToLibrary() {}
