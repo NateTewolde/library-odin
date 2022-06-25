@@ -111,12 +111,21 @@ function newBookForm() {
   const readLabel = document.createElement("label");
   readLabel.setAttribute("for", "read");
   readLabel.textContent = "Have you read this book?\n";
-  const readInput = document.createElement("input");
-  readInput.setAttribute("type", "text");
-  readInput.setAttribute("name", "read");
-  readInput.setAttribute("id", "read");
+  const readSelect = document.createElement("select");
+  readSelect.setAttribute("name", "read");
+  const readOptionYes = document.createElement("option");
+  readOptionYes.setAttribute("value", "yes");
+  readOptionYes.setAttribute("selected", "");
+  readOptionYes.textContent = "Yes 😃";
+
+  const readOptionNo = document.createElement("option");
+  readOptionNo.setAttribute("value", "no");
+  readOptionNo.textContent = "No  😢";
+
+  readSelect.appendChild(readOptionYes);
+  readSelect.appendChild(readOptionNo);
   readField.appendChild(readLabel);
-  readField.appendChild(readInput);
+  readField.appendChild(readSelect);
   newBookForm.appendChild(readField);
 
   formSection.appendChild(formHeader);
