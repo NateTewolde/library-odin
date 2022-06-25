@@ -1,3 +1,4 @@
+const container = document.querySelector("#container");
 let myLibrary = [];
 
 function Book(title, author, pages, readBook) {
@@ -19,17 +20,18 @@ const theHobbit = new Book(
 );
 const thePenis = new Book("The Penis", "P.P Penis", "69", "read every day");
 
-console.log(theHobbit.info());
-console.log(thePenis.info());
-
 myLibrary.push(theHobbit);
 myLibrary.push(thePenis);
 
-console.log("hi");
 displayBooks();
 function addBookToLibrary() {}
 
 function displayBooks() {
-  console.table(myLibrary[0]);
-  console.table(myLibrary[1]);
+  for (book in myLibrary) {
+    const bookDisplay = document.createElement("div");
+    bookDisplay.classList.add("book-display-class");
+    console.log(myLibrary[book].info());
+    bookDisplay.textContent = myLibrary[book].info();
+    container.appendChild(bookDisplay);
+  }
 }
