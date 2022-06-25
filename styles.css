@@ -1,0 +1,26 @@
+#container {
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  justify-items: center;
+  row-gap: 50px;
+}
+
+.btn-container {
+  display: grid;
+  justify-content: center;
+}
+
+#books-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.book-class {
+  width: 250px;
+  height: 350px;
+  background-color: lightblue;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  place-items: center;
+}
