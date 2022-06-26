@@ -45,6 +45,24 @@ function submitFormButton() {
   submitFormBtn.addEventListener("click", addBookToLibrary);
 }
 
+function deleteBookButton() {
+  const deleteBookBtns = document.querySelectorAll(".delete-book-btn");
+  deleteBookBtns.forEach((deleteBtn) => {
+    deleteBtn.addEventListener("click", () => {
+      deleteBook(deleteBtn.parentNode);
+    });
+  });
+}
+
+function updateBookButton() {
+  const updateBookBtns = document.querySelectorAll(".update-book-btn");
+  updateBookBtns.forEach((updateBtn) => {
+    updateBtn.addEventListener("click", () => {
+      updateBook(updateBtn.parentNode);
+    });
+  });
+}
+
 function newBookForm() {
   if (checkForForm() === true) {
     return -1;
@@ -158,8 +176,7 @@ function addBookToLibrary() {
 
   const formSection = document.getElementById("form-section");
   container.removeChild(formSection);
-  removeAllChildNodes(booksContainer);
-  displayBooks();
+  refreshLibrary();
 }
 
 displayBooks();
@@ -167,6 +184,7 @@ function displayBooks() {
   for (book in myLibrary) {
     const bookDisplay = document.createElement("div");
     bookDisplay.classList.add("book-class");
+    bookDisplay.setAttribute("data-book-index", book);
 
     const titleDisplay = document.createElement("div");
     titleDisplay.classList.add("title-class");
@@ -188,8 +206,44 @@ function displayBooks() {
     readDisplay.textContent = myLibrary[book].readInfo();
     bookDisplay.appendChild(readDisplay);
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-book-btn");
+    deleteBtn.textContent = "Delete 🗑";
+    bookDisplay.appendChild(deleteBtn);
+
+    const updateBtn = document.createElement("button");
+    updateBtn.classList.add("update-book-btn");
+    updateBtn.textContent = "Update 🖋";
+    bookDisplay.appendChild(updateBtn);
+
     booksContainer.appendChild(bookDisplay);
   }
+  deleteBookButton();
+  updateBookButton();
+}
+
+function deleteBook(book) {
+  let bookIndex = book.getAttribute("data-book-index");
+  myLibrary.splice(bookIndex, 1);
+  refreshLibrary();
+}
+
+function updateBook(book) {
+  let bookIndex = book.getAttribute("data-book-index");
+  let bookRead = myLibrary[bookIndex].readInfo();
+
+  if (bookRead.includes("Yes")) {
+    myLibrary[bookIndex].readBook = "No 😢";
+  } else {
+    myLibrary[bookIndex].readBook = "Yes 😃";
+  }
+  refreshLibrary();
+  return;
+}
+
+function refreshLibrary() {
+  removeAllChildNodes(booksContainer);
+  displayBooks();
 }
 
 function removeAllChildNodes(parent) {
