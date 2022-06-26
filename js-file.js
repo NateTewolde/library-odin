@@ -1,9 +1,13 @@
 const container = document.querySelector("#container");
 const booksContainer = document.querySelector("#books-container");
+
+//holds all the Book objects
 let myLibrary = [];
 
+//initializes the newBookButton so it may be used
 newBookButton();
 
+//Book constructor. Creates book objects
 function Book(title, author, pages, readBook) {
   this.title = title;
   this.author = author;
@@ -11,6 +15,7 @@ function Book(title, author, pages, readBook) {
   this.readBook = readBook;
 }
 
+//These prototype functions return Book property values formatted with a label
 Book.prototype.titleInfo = function () {
   return `Title: ${this.title}`;
 };
@@ -35,16 +40,19 @@ const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", "295", "No 😢");
 
 myLibrary.push(theHobbit);
 
+//formats the new book button
 function newBookButton() {
   const newBookBtn = document.querySelector(".new-book-btn");
   newBookBtn.addEventListener("click", newBookForm);
 }
 
+//formats the submit button on the new book form
 function submitFormButton() {
   const submitFormBtn = document.querySelector(".submit-form-btn");
   submitFormBtn.addEventListener("click", addBookToLibrary);
 }
 
+//formats the delete button on each book to send to deleteBook() on click
 function deleteBookButton() {
   const deleteBookBtns = document.querySelectorAll(".delete-book-btn");
   deleteBookBtns.forEach((deleteBtn) => {
@@ -54,6 +62,7 @@ function deleteBookButton() {
   });
 }
 
+//formats the update books buttons on each book to send to updateBook() on click
 function updateBookButton() {
   const updateBookBtns = document.querySelectorAll(".update-book-btn");
   updateBookBtns.forEach((updateBtn) => {
@@ -63,6 +72,7 @@ function updateBookButton() {
   });
 }
 
+//creates a new book form on the page
 function newBookForm() {
   if (checkForForm() === true) {
     return -1;
@@ -156,6 +166,7 @@ function newBookForm() {
   submitFormButton();
 }
 
+//checks if a new book form is present on the page
 function checkForForm() {
   const formCheck = document.getElementById("form-section");
   if (!formCheck) {
@@ -179,6 +190,7 @@ function addBookToLibrary() {
   refreshLibrary();
 }
 
+//creates all the books for the browser page from myLibrary
 displayBooks();
 function displayBooks() {
   for (book in myLibrary) {
@@ -222,12 +234,14 @@ function displayBooks() {
   updateBookButton();
 }
 
+//removes a book from the library
 function deleteBook(book) {
   let bookIndex = book.getAttribute("data-book-index");
   myLibrary.splice(bookIndex, 1);
   refreshLibrary();
 }
 
+//Toggles the Read? status for a book
 function updateBook(book) {
   let bookIndex = book.getAttribute("data-book-index");
   let bookRead = myLibrary[bookIndex].readInfo();
@@ -241,11 +255,13 @@ function updateBook(book) {
   return;
 }
 
+//clears all the books displaying in the library page and re-displays them from the array.
 function refreshLibrary() {
   removeAllChildNodes(booksContainer);
   displayBooks();
 }
 
+//helper function
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
