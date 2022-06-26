@@ -31,16 +31,9 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readBook}`;
 };
 
-const theHobbit = new Book(
-  "The Hobbit",
-  "J.R.R Tolkien",
-  "295",
-  "not read yet"
-);
-const thePenis = new Book("The Penis", "P.P Penis", "69", "read every day");
+const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", "295", "No 😢");
 
 myLibrary.push(theHobbit);
-myLibrary.push(thePenis);
 
 function newBookButton() {
   const newBookBtn = document.querySelector(".new-book-btn");
@@ -157,8 +150,16 @@ function addBookToLibrary() {
   const titleInput = document.getElementById("title").value;
   const authorInput = document.getElementById("author").value;
   const pagesInput = document.getElementById("pages").value;
-  const select = document.getElementById("read");
-  var text = select.options[select.selectedIndex].text;
+  const readSelected = document.getElementById("read");
+  const readInput = readSelected.options[readSelected.selectedIndex].text;
+
+  const newBook = new Book(titleInput, authorInput, pagesInput, readInput);
+  myLibrary.push(newBook);
+
+  const formSection = document.getElementById("form-section");
+  container.removeChild(formSection);
+  removeAllChildNodes(booksContainer);
+  displayBooks();
 }
 
 displayBooks();
@@ -188,5 +189,11 @@ function displayBooks() {
     bookDisplay.appendChild(readDisplay);
 
     booksContainer.appendChild(bookDisplay);
+  }
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
   }
 }
