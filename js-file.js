@@ -118,7 +118,7 @@ function newBookForm() {
   readLabel.setAttribute("for", "read");
   readLabel.textContent = "Have you read this book?\n";
   const readSelect = document.createElement("select");
-  readSelect.setAttribute("name", "read");
+  readSelect.setAttribute("id", "read");
   const readOptionYes = document.createElement("option");
   readOptionYes.setAttribute("value", "yes");
   readOptionYes.setAttribute("selected", "");
@@ -157,7 +157,8 @@ function addBookToLibrary() {
   const titleInput = document.getElementById("title").value;
   const authorInput = document.getElementById("author").value;
   const pagesInput = document.getElementById("pages").value;
-  console.log(titleInput + authorInput + pagesInput);
+  const select = document.getElementById("read");
+  var text = select.options[select.selectedIndex].text;
 }
 
 displayBooks();
