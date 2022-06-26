@@ -47,9 +47,18 @@ function newBookButton() {
   newBookBtn.addEventListener("click", newBookForm);
 }
 
+function submitFormButton() {
+  const submitFormBtn = document.querySelector(".submit-form-btn");
+  submitFormBtn.addEventListener("click", addBookToLibrary);
+}
+
 function newBookForm() {
+  if (checkForForm() === true) {
+    return -1;
+  }
+
   const formSection = document.createElement("div");
-  formSection.classList.add("form-section");
+  formSection.setAttribute("id", "form-section");
 
   const formHeader = document.createElement("div");
   formHeader.classList.add("form-header");
@@ -135,6 +144,14 @@ function newBookForm() {
   formSection.appendChild(formHeader);
   formSection.appendChild(newBookForm);
   container.appendChild(formSection);
+}
+
+function checkForForm() {
+  const formCheck = document.getElementById("form-section");
+  if (!formCheck) {
+    return false;
+  }
+  return true;
 }
 
 function addBookToLibrary() {}
