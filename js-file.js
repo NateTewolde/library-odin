@@ -79,7 +79,6 @@ function newBookForm() {
   titleInput.setAttribute("name", "title");
   titleInput.setAttribute("id", "title");
   titleInput.setAttribute("placeholder", "Title");
-  titleInput.setAttribute("required", "");
   titleField.appendChild(titleLabel);
   titleField.appendChild(titleInput);
   newBookForm.appendChild(titleField);
@@ -94,7 +93,6 @@ function newBookForm() {
   authorInput.setAttribute("name", "author");
   authorInput.setAttribute("id", "author");
   authorInput.setAttribute("placeholder", "Author");
-  authorInput.setAttribute("required", "");
   authorField.appendChild(authorLabel);
   authorField.appendChild(authorInput);
   newBookForm.appendChild(authorField);
@@ -110,7 +108,6 @@ function newBookForm() {
   pagesInput.setAttribute("id", "pages");
   pagesInput.setAttribute("placeholder", "Pages");
   pagesInput.setAttribute("min", 1);
-  pagesInput.setAttribute("required", "");
   pagesField.appendChild(pagesLabel);
   pagesField.appendChild(pagesInput);
   newBookForm.appendChild(pagesField);
@@ -137,13 +134,15 @@ function newBookForm() {
 
   const submitBtn = document.createElement("button");
   submitBtn.classList.add("submit-form-btn");
-  submitBtn.setAttribute("type", "submit");
+  submitBtn.setAttribute("type", "button");
   submitBtn.textContent = "Submit";
   newBookForm.appendChild(submitBtn);
 
   formSection.appendChild(formHeader);
   formSection.appendChild(newBookForm);
   container.appendChild(formSection);
+
+  submitFormButton();
 }
 
 function checkForForm() {
@@ -154,7 +153,12 @@ function checkForForm() {
   return true;
 }
 
-function addBookToLibrary() {}
+function addBookToLibrary() {
+  const titleInput = document.getElementById("title").value;
+  const authorInput = document.getElementById("author").value;
+  const pagesInput = document.getElementById("pages").value;
+  console.log(titleInput + authorInput + pagesInput);
+}
 
 displayBooks();
 function displayBooks() {
